@@ -9,6 +9,9 @@ fun String?.isValidEmail(context: Context?) = when {
     this.isNullOrEmpty() -> {
         Pair(false, context?.getString(R.string.mess_required_field_email))
     }
+    this.isBlank() -> {
+        Pair(false, context?.getString(R.string.mess_field_blank))
+    }
     !Pattern.matches(Constant.REGEX.EMAIL, this) -> {
         Pair(false, context?.getString(R.string.mess_validate_email_failed))
     }
@@ -21,6 +24,9 @@ fun String?.isValidPassword(context: Context?) = when {
     this.isNullOrEmpty() -> {
         Pair(false, context?.getString(R.string.mess_required_field_password))
     }
+    this.isBlank() -> {
+        Pair(false, context?.getString(R.string.mess_field_blank))
+    }
     !this.matches(Constant.REGEX.PASS_WORD.toRegex()) -> {
         Pair(false, context?.getString(R.string.mess_validate_password_failed))
     }
@@ -32,6 +38,9 @@ fun String?.isValidPassword(context: Context?) = when {
 fun String?.isValidConfirmPassword(context: Context?, password: String) = when {
     this.isNullOrEmpty() -> {
         Pair(false, context?.getString(R.string.mess_required_field_confirm_password))
+    }
+    this.isBlank() -> {
+        Pair(false, context?.getString(R.string.mess_field_blank))
     }
     this != password -> {
         Pair(false, context?.getString(R.string.mess_validate_confirm_password_failed))
